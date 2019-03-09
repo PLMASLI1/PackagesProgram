@@ -18,9 +18,10 @@ namespace PackagesProgram.ViewModels
         {
             this.databaseOperation = new DatabaseOperation();
 
-            var packageModels = databaseOperation.GetIdCollectionFromPackagesTable().Select(x => new PackageModel { PackageId = x });
+            var packageModels = databaseOperation.GetIdCollectionFromPackagesTable();
+
             var packagesModel = new PackagesModel();
-            packagesModel.PackageModels.AddRange(packageModels);
+            //packagesModel.PackageModels.AddRange(packageModels);
             Packages.Add(packagesModel);
         }
 

@@ -33,7 +33,7 @@ namespace PackagesProgram.Helpers
             {
                 try
                 {
-                    var sqlCommand = new SqlCommand(Properties.Resources.databaseConnectionString, connection);
+                    var sqlCommand = new SqlCommand(Properties.Resources.SelectAllRecordsFromPackagesTable, connection);
                     var reader = sqlCommand.ExecuteReader();
 
                     while (reader.Read())

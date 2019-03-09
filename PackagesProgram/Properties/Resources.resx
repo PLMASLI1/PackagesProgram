@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="databaseConnectionString" xml:space="preserve">
-    <value>Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\PackagesDatabase.mdf;Integrated Security=True</value>
+    <value>Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True</value>
+  </data>
+  <data name="SelectAllRecordsFromPackagesTable" xml:space="preserve">
+    <value>SELECT * FROM PackagesIds</value>
   </data>
 </root>

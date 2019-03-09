@@ -86,14 +86,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DatabaseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\DatabaseOperation.cs" />
     <Compile Include="Models\PackageModel.cs" />
     <Compile Include="Models\PackagesModel.cs" />
-    <Compile Include="PackagesDatabaseDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PackagesDatabaseDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Views\PackagesView.xaml.cs">
       <DependentUpon>PackagesView.xaml</DependentUpon>
     </Compile>
@@ -118,18 +118,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
-    <None Include="PackagesDatabaseDataSet.xsc">
-      <DependentUpon>PackagesDatabaseDataSet.xsd</DependentUpon>
+    <None Include="DatabaseDataSet.xsc">
+      <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
     </None>
-    <None Include="PackagesDatabaseDataSet.xsd">
+    <None Include="DatabaseDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PackagesDatabaseDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>DatabaseDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="PackagesDatabaseDataSet.xss">
-      <DependentUpon>PackagesDatabaseDataSet.xsd</DependentUpon>
+    <None Include="DatabaseDataSet.xss">
+      <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -139,12 +139,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PackagesDatabase.mdf">
+    <Content Include="Database.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PackagesDatabase_log.ldf">
+    <Content Include="Database_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>PackagesDatabase.mdf</DependentUpon>
+      <DependentUpon>Database.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -61,11 +61,20 @@ namespace PackagesProgram.Properties {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\PackagesDatabase.mdf;Integrated Security=True.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True.
         /// </summary>
         internal static string databaseConnectionString {
             get {
                 return ResourceManager.GetString("databaseConnectionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu SELECT * FROM PackagesIds.
+        /// </summary>
+        internal static string SelectAllRecordsFromPackagesTable {
+            get {
+                return ResourceManager.GetString("SelectAllRecordsFromPackagesTable", resourceCulture);
             }
         }
     }
