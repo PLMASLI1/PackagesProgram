@@ -27,12 +27,12 @@ namespace PackagesProgram.Views
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            PackagesProgram.DatabaseDataSet databaseDataSet = ((PackagesProgram.DatabaseDataSet)(this.FindResource("databaseDataSet")));
-            // Załaduj dane do tabeli PackagesIds. Możesz modyfikować ten kod w razie potrzeby.
-            PackagesProgram.DatabaseDataSetTableAdapters.PackagesIdsTableAdapter databaseDataSetPackagesIdsTableAdapter = new PackagesProgram.DatabaseDataSetTableAdapters.PackagesIdsTableAdapter();
-            databaseDataSetPackagesIdsTableAdapter.Fill(databaseDataSet.PackagesIds);
-            System.Windows.Data.CollectionViewSource packagesIdsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("packagesIdsViewSource")));
-            packagesIdsViewSource.View.MoveCurrentToFirst();
+            //PackagesProgram.DatabaseDataSet databaseDataSet = ((PackagesProgram.DatabaseDataSet)(this.FindResource("databaseDataSet")));
+            //// Załaduj dane do tabeli PackagesIds. Możesz modyfikować ten kod w razie potrzeby.
+            //PackagesProgram.DatabaseDataSetTableAdapters.PackagesIdsTableAdapter databaseDataSetPackagesIdsTableAdapter = new PackagesProgram.DatabaseDataSetTableAdapters.PackagesIdsTableAdapter();
+            //databaseDataSetPackagesIdsTableAdapter.Fill(databaseDataSet.PackagesIds);
+            //System.Windows.Data.CollectionViewSource packagesIdsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("packagesIdsViewSource")));
+            //packagesIdsViewSource.View.MoveCurrentToFirst();
         }
     }
 }

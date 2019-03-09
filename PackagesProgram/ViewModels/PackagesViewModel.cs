@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using PackagesProgram.Helpers;
 using PackagesProgram.Models;
 
@@ -13,28 +12,29 @@ namespace PackagesProgram.ViewModels
         private int startRange;
         private int endRange;
         private string message;
+        private bool startButtonEnabled;
 
         public PackagesViewModel()
         {
             this.databaseOperation = new DatabaseOperation();
-
-            var packageModels = databaseOperation.GetIdCollectionFromPackagesTable();
-
-            var packagesModel = new PackagesModel();
-            //packagesModel.PackageModels.AddRange(packageModels);
-            Packages.Add(packagesModel);
         }
 
         public BindableCollection<PackagesModel> Packages
         {
             get
             {
+                var idsFromDatabase = databaseOperation.GetIdCollectionFromPackagesTable();
+                var packagesModel = new PackagesModel();
+
+                foreach (var id in idsFromDatabase)
+                    packagesModel.PackageModels.Add(new PackageModel { PackageId = id });
+
                 return _packages;
             }
             set
             {
                 _packages = value;
-                //NotifyOfPropertyChange(() => PackageId);
+                NotifyOfPropertyChange(() => Packages);
             }
         }
 
@@ -49,6 +49,7 @@ namespace PackagesProgram.ViewModels
                 CanRandomId();
                 startRange = value;
                 NotifyOfPropertyChange(() => StartRange);
+                NotifyOfPropertyChange(() => StartButtonEnabled);
             }
         }
 
@@ -63,6 +64,7 @@ namespace PackagesProgram.ViewModels
                 CanRandomId();
                 endRange = value;
                 NotifyOfPropertyChange(() => EndRange);
+                NotifyOfPropertyChange(() => StartButtonEnabled);
             }
         }
 
@@ -79,20 +81,48 @@ namespace PackagesProgram.ViewModels
             }
         }
 
+        public bool StartButtonEnabled
+        {
+            get
+            {
+                startButtonEnabled = CanRandomId();
+                return startButtonEnabled;
+            }
+            set
+            {
+                startButtonEnabled = value;
+                NotifyOfPropertyChange(() => Message);
+                NotifyOfPropertyChange(() => StartButtonEnabled);
+            }
+        }
+
         public void SearchAndAddCommand()
         {
             var randomId = databaseOperation.RandomIdFromTheRange(startRange, endRange);
             var isRandomIdExist = databaseOperation.CheckIfIdExist(randomId);
             if (!isRandomIdExist)
+            {
                 databaseOperation.InsertIdToPackagesTable(randomId);
+                NotifyOfPropertyChange(() => Packages);
+            }
             else
+            {
                 message = $"Wylosowano: {randomId}, ktore istnieje w bazie - sprobuj jeszcze raz.";
+                NotifyOfPropertyChange(() => Message);
+            }
         }
 
-        public void CanRandomId()
+        public bool CanRandomId()
         {
             if (startRange > endRange)
+            {
                 message = "Start range position is lower then end range.";
+                NotifyOfPropertyChange(() => Message);
+
+                return false;
+            }
+
+            return true;
         }
     }
 }

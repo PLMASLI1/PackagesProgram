@@ -4,32 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PackagesProgram.Views"
-        xmlns:PackagesProgram="clr-namespace:PackagesProgram" x:Class="PackagesProgram.Views.PackagesView"
+        xmlns:packagesProgram="clr-namespace:PackagesProgram" x:Class="PackagesProgram.Views.PackagesView"
         mc:Ignorable="d" Background="LightGray"
+        xmlns:packagesViewModel="clr-namespace:PackagesProgram"
+        xmlns:viewModels="clr-namespace:PackagesProgram.ViewModels"
+        d:DataContext="{d:DesignInstance viewModels:PackagesViewModel}"
         Title="PackagesView" Height="450" Width="800"
         WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
-	<Window.Resources>
-		<PackagesProgram:DatabaseDataSet x:Key="databaseDataSet"/>
-		<CollectionViewSource x:Key="packagesIdsViewSource" Source="{Binding PackagesIds, Source={StaticResource databaseDataSet}}"/>
-	</Window.Resources>
-	<Grid DataContext="{StaticResource packagesIdsViewSource}">
+
+	<Grid >
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="200"/>
-			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="257"/>
+			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="20"/>
-			<RowDefinition Height="20"/>
-			<RowDefinition Height="20"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<!--<TextBox Text="{Binding Path=PackageId, Mode=OneWay}" Grid.Column="0" Grid.Row="2" />-->
+		<TextBox Text="{Binding EndRange, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" Margin="116,0,10,0" />
+		<TextBox Text="{Binding StartRange, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" Margin="116,0,10,0" />
+		<Label Content="Get start range:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top"/>
+		<Label Content="Get end range:" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top"/>
+		<Label HorizontalAlignment="Left" Margin="0,2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="116" Height="51">
+			<Label.Content>
+				<AccessText TextWrapping="Wrap" Text="Start random id and add to table:" Height="41"></AccessText>
+			</Label.Content>
+		</Label>
 
-		<DataGrid x:Name="packagesIdsDataGrid" Grid.Row="3" IsReadOnly="True" ItemsSource="{Binding}" Grid.Column="1" AutoGenerateColumns="False">
-			<DataGrid.Columns>
-				<DataGridTextColumn x:Name="idColumn" Width="*" Header="Id" Binding="{Binding Id}"/>
-			</DataGrid.Columns>
-		</DataGrid>
+		<Label HorizontalAlignment="Left" Margin="0,2,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
+			<Label.Content>
+				<AccessText TextWrapping="Wrap" Text="{Binding Path=Message}"></AccessText>
+			</Label.Content>
+		</Label>
+
+		<Button Content="Start" IsEnabled="{Binding Path=StartButtonEnabled}" HorizontalAlignment="Left" Margin="116,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="131" Height="26"/>
 
 	</Grid>
 </Window>
