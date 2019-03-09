@@ -61,7 +61,7 @@ namespace PackagesProgram.Helpers
             {
                 try
                 {
-                    var command = "INSERT INTO Packages (Id) VALUES (@Id)";
+                    var command = "INSERT INTO PackagesIds (Id) VALUES (@Id)";
                     var sqlCommand = new SqlCommand(command, connection);
 
                     sqlCommand.Parameters.AddWithValue("@Id", packageId);
@@ -78,7 +78,7 @@ namespace PackagesProgram.Helpers
 
         public int RandomIdFromTheRange(int startRange, int endRange)
         {
-            if (startRange <= 0)
+            if (startRange < 0)
                 throw new ArgumentOutOfRangeException(nameof(startRange));
             if (endRange <= 0)
                 throw new ArgumentOutOfRangeException(nameof(endRange));
@@ -88,7 +88,7 @@ namespace PackagesProgram.Helpers
 
             var random = new Random();
 
-            return random.Next(startRange, endRange + 1);
+            return random.Next(startRange + 1, endRange + 1);
         }
 
         public bool CheckIfIdExist(int searchId)
@@ -99,13 +99,13 @@ namespace PackagesProgram.Helpers
 
             while (left <= right)
             {
-                var currentPosition = left + (right + left) / 2;
+                var currentPosition = (right + left) / 2;
 
                 if (ids[currentPosition] == searchId)
                     return true;
-                if (ids[currentPosition] < searchId)
+                else if (ids[currentPosition] < searchId)
                     left = currentPosition + 1;
-                if (ids[currentPosition] > searchId)
+                else
                     right = currentPosition - 1;
             }
 

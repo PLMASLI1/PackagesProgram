@@ -13,6 +13,7 @@ namespace PackagesProgram.ViewModels
         private int endRange;
         private string message;
         private bool startButtonEnabled;
+        private int randomId;
 
         public PackagesViewModel()
         {
@@ -80,6 +81,18 @@ namespace PackagesProgram.ViewModels
                 NotifyOfPropertyChange(() => Message);
             }
         }
+        public int RandomId
+        {
+            get
+            {
+                return randomId;
+            }
+            set
+            {
+                randomId = value;
+                NotifyOfPropertyChange(() => randomId);
+            }
+        }
 
         public bool StartButtonEnabled
         {
@@ -98,16 +111,19 @@ namespace PackagesProgram.ViewModels
 
         public void SearchAndAddCommand()
         {
-            var randomId = databaseOperation.RandomIdFromTheRange(startRange, endRange);
-            var isRandomIdExist = databaseOperation.CheckIfIdExist(randomId);
+            var randomValue = databaseOperation.RandomIdFromTheRange(startRange, endRange);
+            randomId = randomValue;
+            NotifyOfPropertyChange(() => randomId);
+
+            var isRandomIdExist = databaseOperation.CheckIfIdExist(randomValue);
             if (!isRandomIdExist)
             {
-                databaseOperation.InsertIdToPackagesTable(randomId);
+                databaseOperation.InsertIdToPackagesTable(randomValue);
                 NotifyOfPropertyChange(() => Packages);
             }
             else
             {
-                message = $"Wylosowano: {randomId}, ktore istnieje w bazie - sprobuj jeszcze raz.";
+                message = $"Wylosowano: {randomValue}, ktore istnieje w bazie - sprobuj jeszcze raz.";
                 NotifyOfPropertyChange(() => Message);
             }
         }
@@ -121,6 +137,9 @@ namespace PackagesProgram.ViewModels
 
                 return false;
             }
+
+            message = string.Empty;
+            NotifyOfPropertyChange(() => Message);
 
             return true;
         }
