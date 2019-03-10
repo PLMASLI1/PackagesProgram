@@ -8,9 +8,9 @@ namespace PackagesProgram.Helpers
 {
     public class DatabaseOperation
     {
-        public SqlConnection GetDatabaseConnection()
+        public SqlConnection GetOpenDatabaseConnection()
         {
-            var connection = new SqlConnection(Properties.Resources.databaseConnectionString);
+            var connection = new SqlConnection(Settings.Default.DatabaseConnectionString);
 
             try
             {
@@ -24,15 +24,15 @@ namespace PackagesProgram.Helpers
             }
         }
 
-        public IList<int> GetIdCollectionFromPackagesTable()
+        public IList<int> GetIdsFromPackagesTable()
         {
             var list = new List<int>();
 
-            using (var connection = GetDatabaseConnection())
+            using (var connection = GetOpenDatabaseConnection())
             {
                 try
                 {
-                    var sqlCommand = new SqlCommand(Properties.Resources.SelectAllRecordsFromPackagesTable, connection);
+                    var sqlCommand = new SqlCommand(Resources.SelectAllRecordsFromPackagesTable, connection);
                     var reader = sqlCommand.ExecuteReader();
 
                     while (reader.Read())
@@ -43,7 +43,7 @@ namespace PackagesProgram.Helpers
                 }
                 catch (Exception e)
                 {
-                    throw new ArgumentException($"Exception: {e}. Inner exception: {e.InnerException}");
+                    throw new ArgumentException(string.Format(Resources.DownloadInterruptedMessage, e, e.InnerException));
                 }
             }
 
@@ -55,7 +55,7 @@ namespace PackagesProgram.Helpers
             if (packageId <= 0)
                 throw new ArgumentOutOfRangeException(nameof(packageId));
 
-            using (var connection = GetDatabaseConnection())
+            using (var connection = GetOpenDatabaseConnection())
             {
                 try
                 {
@@ -66,7 +66,7 @@ namespace PackagesProgram.Helpers
                 }
                 catch (Exception e)
                 {
-                    throw new ArgumentException($"Exception: {e}. Inner exception: {e.InnerException}");
+                    throw new ArgumentException(string.Format(Resources.InsertInterruptedMessage, e, e.InnerException));
                 }
             }
         }
@@ -78,14 +78,14 @@ namespace PackagesProgram.Helpers
             if (endRange <= 0)
                 return -1;
             if (startRange > endRange)
-                throw new ArgumentOutOfRangeException(nameof(endRange), "The specified range is incorrect.");
+                throw new ArgumentOutOfRangeException(string.Format(Resources.RandomIdInterruptedMessage, startRange, endRange));
 
             return new Random().Next(startRange + 1, endRange + 1);
         }
 
-        public bool CheckIfIdExist(int searchId)
+        public bool CheckIfIdExistInDatabase(int searchId)
         {
-            var ids = GetIdCollectionFromPackagesTable();
+            var ids = GetIdsFromPackagesTable();
             var left = 0;
             var right = ids.Count - 1;
 

@@ -26,7 +26,7 @@ namespace PackagesProgram.ViewModels
             {
                 _packages.Clear();
 
-                foreach (var id in databaseOperation.GetIdCollectionFromPackagesTable())
+                foreach (var id in databaseOperation.GetIdsFromPackagesTable())
                     _packages.Add(new PackageModel { PackageId = id });
 
                 return _packages;
@@ -114,7 +114,7 @@ namespace PackagesProgram.ViewModels
             randomId = randomValue;
             NotifyOfPropertyChange(() => randomId);
 
-            if (randomValue > 0 && !databaseOperation.CheckIfIdExist(randomValue))
+            if (randomValue > 0 && !databaseOperation.CheckIfIdExistInDatabase(randomValue))
             {
                 databaseOperation.InsertIdToPackagesTable(randomValue);
                 message = Resources.SuccessfulInsertMessage;

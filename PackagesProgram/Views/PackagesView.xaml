@@ -24,10 +24,10 @@
 
 		<TextBox Text="{Binding EndRange, Mode=TwoWay}" PreviewTextInput="NumberValidator" Grid.Column="0" Grid.Row="2" Margin="116,0,10,0" />
 		<TextBox Text="{Binding StartRange, Mode=TwoWay}" PreviewTextInput="NumberValidator" Grid.Column="0" Grid.Row="1" Margin="116,0,10,0" />
-		
+
 		<Label Content="Get start range:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top"/>
 		<Label Content="Get end range:" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top"/>
-		
+
 		<Label HorizontalAlignment="Left" Margin="0,2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="116" Height="51">
 			<Label.Content>
 				<AccessText TextWrapping="Wrap" Text="Start random id and add to table:" Height="41"></AccessText>
@@ -55,7 +55,7 @@
 		</Label>
 
 		<Button x:Name="SearchAndAddCommand" Content="Start" IsEnabled="{Binding Path=StartButtonEnabled}" HorizontalAlignment="Left" Margin="116,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="131" Height="26"/>
-		
+
 		<Label Content="Random value:" HorizontalAlignment="Left" Margin="0,53,0,0" Grid.Row="3" VerticalAlignment="Top" Width="98"/>
 		<Label Content="{Binding RandomId}" HorizontalAlignment="Left" Margin="116,53,0,0" Grid.Row="3" VerticalAlignment="Top"/>
 

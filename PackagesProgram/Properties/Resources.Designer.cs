@@ -70,11 +70,11 @@ namespace PackagesProgram.Properties {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The download of the ids was interrupted with an error: {0}. Inner exception: {1}.
         /// </summary>
-        internal static string databaseConnectionString {
+        internal static string DownloadInterruptedMessage {
             get {
-                return ResourceManager.GetString("databaseConnectionString", resourceCulture);
+                return ResourceManager.GetString("DownloadInterruptedMessage", resourceCulture);
             }
         }
         
@@ -102,6 +102,24 @@ namespace PackagesProgram.Properties {
         internal static string InsertCommand {
             get {
                 return ResourceManager.GetString("InsertCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Inserting an id into packages table was interrupted with an error: {0}. Inner exception: {1}.
+        /// </summary>
+        internal static string InsertInterruptedMessage {
+            get {
+                return ResourceManager.GetString("InsertInterruptedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The specified range ({0} - {1}) is incorrect..
+        /// </summary>
+        internal static string RandomIdInterruptedMessage {
+            get {
+                return ResourceManager.GetString("RandomIdInterruptedMessage", resourceCulture);
             }
         }
         
