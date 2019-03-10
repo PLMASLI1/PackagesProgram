@@ -26,19 +26,9 @@ namespace PackagesProgram.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\PackagesDatab" +
-            "ase.mdf;Integrated Security=True")]
-        public string PackagesDatabaseConnectionString {
-            get {
-                return ((string)(this["PackagesDatabaseConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database.mdf;" +
-            "Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\slifi\\Desktop\\Packag" +
+            "esProgram\\PackagesProgram\\PackagesProgram\\Database.mdf; Database=Database;Integr" +
+            "ated Security=True")]
         public string DatabaseConnectionString {
             get {
                 return ((string)(this["DatabaseConnectionString"]));

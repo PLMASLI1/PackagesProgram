@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using PackagesProgram.Properties;
 
 namespace PackagesProgram.Helpers
 {
@@ -10,6 +11,7 @@ namespace PackagesProgram.Helpers
         public SqlConnection GetDatabaseConnection()
         {
             var connection = new SqlConnection(Properties.Resources.databaseConnectionString);
+
             try
             {
                 if (connection.State != ConnectionState.Open)
@@ -18,11 +20,8 @@ namespace PackagesProgram.Helpers
             }
             catch (SqlException e)
             {
-                Console.WriteLine($"Problem with connection to database. Exception: {e}");
-                Console.ReadKey();
+                throw new System.Exception(string.Format(Resources.ConnectionErrorMessage, e, e.InnerException));
             }
-
-            return connection;
         }
 
         public IList<int> GetIdCollectionFromPackagesTable()
@@ -44,8 +43,7 @@ namespace PackagesProgram.Helpers
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    throw;
+                    throw new ArgumentException($"Exception: {e}. Inner exception: {e.InnerException}");
                 }
             }
 
@@ -61,17 +59,14 @@ namespace PackagesProgram.Helpers
             {
                 try
                 {
-                    var command = "INSERT INTO PackagesIds (Id) VALUES (@Id)";
-                    var sqlCommand = new SqlCommand(command, connection);
-
+                    var sqlCommand = new SqlCommand(Resources.InsertCommand, connection);
                     sqlCommand.Parameters.AddWithValue("@Id", packageId);
                     sqlCommand.Connection = connection;
                     sqlCommand.ExecuteNonQuery();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    throw;
+                    throw new ArgumentException($"Exception: {e}. Inner exception: {e.InnerException}");
                 }
             }
         }
@@ -79,16 +74,13 @@ namespace PackagesProgram.Helpers
         public int RandomIdFromTheRange(int startRange, int endRange)
         {
             if (startRange < 0)
-                throw new ArgumentOutOfRangeException(nameof(startRange));
+                return -1;
             if (endRange <= 0)
-                throw new ArgumentOutOfRangeException(nameof(endRange));
-
+                return -1;
             if (startRange > endRange)
-                throw new ArgumentOutOfRangeException(nameof(endRange));
+                throw new ArgumentOutOfRangeException(nameof(endRange), "The specified range is incorrect.");
 
-            var random = new Random();
-
-            return random.Next(startRange + 1, endRange + 1);
+            return new Random().Next(startRange + 1, endRange + 1);
         }
 
         public bool CheckIfIdExist(int searchId)

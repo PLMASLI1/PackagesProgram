@@ -123,4 +123,22 @@
   <data name="SelectAllRecordsFromPackagesTable" xml:space="preserve">
     <value>SELECT * FROM PackagesIds</value>
   </data>
+  <data name="ConnectionErrorMessage" xml:space="preserve">
+    <value>Problem with connection to database. Exception: {0}. Inner exception: {1}.</value>
+  </data>
+  <data name="IncorrectNumberMessage" xml:space="preserve">
+    <value>Your drawn number: {0}. This values exists in the database - try again.</value>
+  </data>
+  <data name="IncorrectRangeMessage" xml:space="preserve">
+    <value>You entered an incorrect range - intersection failed.</value>
+  </data>
+  <data name="InsertCommand" xml:space="preserve">
+    <value>INSERT INTO PackagesIds (Id) VALUES (@Id)</value>
+  </data>
+  <data name="StartAndFinalValueAreIncorrectMessage" xml:space="preserve">
+    <value>The starting value of the range is greater than/equal to the final number.</value>
+  </data>
+  <data name="SuccessfulInsertMessage" xml:space="preserve">
+    <value>Adding values to the table was successful.</value>
+  </data>
 </root>

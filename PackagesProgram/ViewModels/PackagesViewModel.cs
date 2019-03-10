@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using PackagesProgram.Helpers;
 using PackagesProgram.Models;
+using PackagesProgram.Properties;
 
 namespace PackagesProgram.ViewModels
 {
@@ -23,6 +24,8 @@ namespace PackagesProgram.ViewModels
         {
             get
             {
+                _packages.Clear();
+
                 foreach (var id in databaseOperation.GetIdCollectionFromPackagesTable())
                     _packages.Add(new PackageModel { PackageId = id });
 
@@ -111,24 +114,26 @@ namespace PackagesProgram.ViewModels
             randomId = randomValue;
             NotifyOfPropertyChange(() => randomId);
 
-            var isRandomIdExist = databaseOperation.CheckIfIdExist(randomValue);
-            if (!isRandomIdExist)
+            if (randomValue > 0 && !databaseOperation.CheckIfIdExist(randomValue))
             {
                 databaseOperation.InsertIdToPackagesTable(randomValue);
+                message = Resources.SuccessfulInsertMessage;
                 NotifyOfPropertyChange(() => Packages);
             }
             else
             {
-                message = $"Wylosowano: {randomValue}, ktore istnieje w bazie - sprobuj jeszcze raz.";
-                NotifyOfPropertyChange(() => Message);
+                message = randomValue < 0 ? Resources.IncorrectRangeMessage
+                    : string.Format(Resources.IncorrectNumberMessage, randomId);
             }
+
+            NotifyOfPropertyChange(() => Message);
         }
 
         public bool CanRandomId()
         {
-            if (startRange > endRange)
+            if (startRange >= endRange)
             {
-                message = "Start range position is lower then end range.";
+                message = Resources.StartAndFinalValueAreIncorrectMessage;
                 NotifyOfPropertyChange(() => Message);
 
                 return false;
