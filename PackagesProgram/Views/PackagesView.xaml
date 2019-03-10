@@ -3,10 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PackagesProgram.Views"
-        xmlns:packagesProgram="clr-namespace:PackagesProgram" x:Class="PackagesProgram.Views.PackagesView"
+        x:Class="PackagesProgram.Views.PackagesView"
         mc:Ignorable="d" Background="LightGray"
-        xmlns:packagesViewModel="clr-namespace:PackagesProgram"
         xmlns:viewModels="clr-namespace:PackagesProgram.ViewModels"
         d:DataContext="{d:DesignInstance viewModels:PackagesViewModel}"
         Title="PackagesView" Height="450" Width="800"
@@ -23,8 +21,8 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<TextBox Text="{Binding EndRange, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" Margin="116,0,10,0" />
-		<TextBox Text="{Binding StartRange, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" Margin="116,0,10,0" />
+		<TextBox Text="{Binding EndRange, Mode=TwoWay}" PreviewTextInput="NumberValidator" Grid.Column="0" Grid.Row="2" Margin="116,0,10,0" />
+		<TextBox Text="{Binding StartRange, Mode=TwoWay}" PreviewTextInput="NumberValidator" Grid.Column="0" Grid.Row="1" Margin="116,0,10,0" />
 		<Label Content="Get start range:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top"/>
 		<Label Content="Get end range:" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top"/>
 		<Label HorizontalAlignment="Left" Margin="0,2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="116" Height="51">
@@ -32,6 +30,21 @@
 				<AccessText TextWrapping="Wrap" Text="Start random id and add to table:" Height="41"></AccessText>
 			</Label.Content>
 		</Label>
+
+		<DataGrid 
+			HorizontalAlignment="Left" 
+			Height="325" 
+			Margin="10,10,0,0" 
+			VerticalAlignment="Top" 
+			Width="515"
+			ItemsSource="{Binding Packages}" 
+			RowBackground="#FFC2EE82" Grid.Row="3" Grid.Column="1"
+			IsReadOnly="True"
+			DisplayMemberPath="PackageId">
+			<DataGrid.Columns>
+				<DataGridTextColumn x:Name="idColumn" IsReadOnly="True" Header="Package Id" Width="*"/>
+			</DataGrid.Columns>
+		</DataGrid>
 
 		<Label HorizontalAlignment="Left" Margin="0,2,0,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
 			<Label.Content>

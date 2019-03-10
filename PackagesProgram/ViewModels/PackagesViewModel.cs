@@ -7,8 +7,7 @@ namespace PackagesProgram.ViewModels
     public class PackagesViewModel : Screen
     {
         private readonly DatabaseOperation databaseOperation;
-        private BindableCollection<PackagesModel> _packages = new BindableCollection<PackagesModel>();
-        private int id;
+        private BindableCollection<PackageModel> _packages = new BindableCollection<PackageModel>();
         private int startRange;
         private int endRange;
         private string message;
@@ -20,15 +19,12 @@ namespace PackagesProgram.ViewModels
             this.databaseOperation = new DatabaseOperation();
         }
 
-        public BindableCollection<PackagesModel> Packages
+        public BindableCollection<PackageModel> Packages
         {
             get
             {
-                var idsFromDatabase = databaseOperation.GetIdCollectionFromPackagesTable();
-                var packagesModel = new PackagesModel();
-
-                foreach (var id in idsFromDatabase)
-                    packagesModel.PackageModels.Add(new PackageModel { PackageId = id });
+                foreach (var id in databaseOperation.GetIdCollectionFromPackagesTable())
+                    _packages.Add(new PackageModel { PackageId = id });
 
                 return _packages;
             }
