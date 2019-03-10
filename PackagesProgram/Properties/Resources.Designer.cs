@@ -61,6 +61,15 @@ namespace PackagesProgram.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adding the random value ended with en error: {0}, inner exception: {1}..
+        /// </summary>
+        internal static string AddToTableInterruptedMessage {
+            get {
+                return ResourceManager.GetString("AddToTableInterruptedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Problem with connection to database. Exception: {0}. Inner exception: {1}..
         /// </summary>
         internal static string ConnectionErrorMessage {
@@ -75,6 +84,15 @@ namespace PackagesProgram.Properties {
         internal static string DownloadInterruptedMessage {
             get {
                 return ResourceManager.GetString("DownloadInterruptedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Your id is less or equal to 0. This is incorrect..
+        /// </summary>
+        internal static string IncorrectIdMessage {
+            get {
+                return ResourceManager.GetString("IncorrectIdMessage", resourceCulture);
             }
         }
         
@@ -147,6 +165,15 @@ namespace PackagesProgram.Properties {
         internal static string SuccessfulInsertMessage {
             get {
                 return ResourceManager.GetString("SuccessfulInsertMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu You have given too large a range. Maximum range is 0 - 10 000 000. Please change the range..
+        /// </summary>
+        internal static string TooBigRangeMessage {
+            get {
+                return ResourceManager.GetString("TooBigRangeMessage", resourceCulture);
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using System.Linq;
+using Caliburn.Micro;
 using PackagesProgram.Helpers;
 using PackagesProgram.Models;
 using PackagesProgram.Properties;
@@ -108,25 +110,33 @@ namespace PackagesProgram.ViewModels
             }
         }
 
-        public void SearchAndAddCommand()
+        public void AddRandomValueToTable()
         {
-            var randomValue = databaseOperation.RandomIdFromTheRange(startRange, endRange);
-            randomId = randomValue;
-            NotifyOfPropertyChange(() => randomId);
-
-            if (randomValue > 0 && !databaseOperation.CheckIfIdExistInDatabase(randomValue))
+            try
             {
-                databaseOperation.InsertIdToPackagesTable(randomValue);
-                message = Resources.SuccessfulInsertMessage;
-                NotifyOfPropertyChange(() => Packages);
-            }
-            else
-            {
-                message = randomValue < 0 ? Resources.IncorrectRangeMessage
-                    : string.Format(Resources.IncorrectNumberMessage, randomId);
-            }
+                var randomValue = databaseOperation.RandomIdFromTheRange(startRange, endRange);
+                var idsFromDatabase = databaseOperation.GetIdsFromPackagesTable().ToList();
+                randomId = randomValue;
+                NotifyOfPropertyChange(() => randomId);
 
-            NotifyOfPropertyChange(() => Message);
+                if (randomValue > 0 && !databaseOperation.CheckIfIdExistInDatabase(randomValue, idsFromDatabase))
+                {
+                    databaseOperation.InsertIdToPackagesTable(randomValue);
+                    message = Resources.SuccessfulInsertMessage;
+                    NotifyOfPropertyChange(() => Packages);
+                }
+                else
+                {
+                    message = randomValue < 0 ? Resources.IncorrectRangeMessage
+                        : string.Format(Resources.IncorrectNumberMessage, randomId);
+                }
+
+                NotifyOfPropertyChange(() => Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(string.Format(Resources.AddToTableInterruptedMessage, e, e.InnerException));
+            }
         }
 
         public bool CanRandomId()
@@ -134,6 +144,14 @@ namespace PackagesProgram.ViewModels
             if (startRange >= endRange)
             {
                 message = Resources.StartAndFinalValueAreIncorrectMessage;
+                NotifyOfPropertyChange(() => Message);
+
+                return false;
+            }
+
+            if (endRange > 10000000)
+            {
+                message = Resources.TooBigRangeMessage;
                 NotifyOfPropertyChange(() => Message);
 
                 return false;

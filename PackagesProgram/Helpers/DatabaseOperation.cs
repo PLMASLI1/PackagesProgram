@@ -83,19 +83,21 @@ namespace PackagesProgram.Helpers
             return new Random().Next(startRange + 1, endRange + 1);
         }
 
-        public bool CheckIfIdExistInDatabase(int searchId)
+        public bool CheckIfIdExistInDatabase(int searchId, List<int> idsFromDatabase)
         {
-            var ids = GetIdsFromPackagesTable();
+            if (searchId <= 0)
+                throw new ArgumentOutOfRangeException(Resources.IncorrectIdMessage);
+
             var left = 0;
-            var right = ids.Count - 1;
+            var right = idsFromDatabase.Count - 1;
 
             while (left <= right)
             {
                 var currentPosition = (right + left) / 2;
 
-                if (ids[currentPosition] == searchId)
+                if (idsFromDatabase[currentPosition] == searchId)
                     return true;
-                else if (ids[currentPosition] < searchId)
+                else if (idsFromDatabase[currentPosition] < searchId)
                     left = currentPosition + 1;
                 else
                     right = currentPosition - 1;

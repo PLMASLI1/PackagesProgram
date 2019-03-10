@@ -54,7 +54,7 @@
 			</Label.Content>
 		</Label>
 
-		<Button x:Name="SearchAndAddCommand" Content="Start" IsEnabled="{Binding Path=StartButtonEnabled}" HorizontalAlignment="Left" Margin="116,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="131" Height="26"/>
+		<Button x:Name="AddRandomValueToTable" Content="Start" IsEnabled="{Binding Path=StartButtonEnabled}" HorizontalAlignment="Left" Margin="116,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="131" Height="26"/>
 
 		<Label Content="Random value:" HorizontalAlignment="Left" Margin="0,53,0,0" Grid.Row="3" VerticalAlignment="Top" Width="98"/>
 		<Label Content="{Binding RandomId}" HorizontalAlignment="Left" Margin="116,53,0,0" Grid.Row="3" VerticalAlignment="Top"/>

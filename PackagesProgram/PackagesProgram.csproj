@@ -86,7 +86,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\DatabaseOperation.cs" />
+    <Compile Include="Helpers\DatabaseOperation.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Models\PackageModel.cs" />
     <Compile Include="Views\PackagesView.xaml.cs">
       <DependentUpon>PackagesView.xaml</DependentUpon>
