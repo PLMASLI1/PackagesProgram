@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net.Sockets;
 using PackagesProgram.Properties;
 
 namespace PackagesProgram.Helpers
@@ -73,37 +74,47 @@ namespace PackagesProgram.Helpers
 
         public int RandomIdFromTheRange(int startRange, int endRange)
         {
-            if (startRange < 0)
+            if (startRange <= 0)
                 return -1;
             if (endRange <= 0)
                 return -1;
-            if (startRange > endRange)
+            if (startRange >= endRange)
                 throw new ArgumentOutOfRangeException(string.Format(Resources.RandomIdInterruptedMessage, startRange, endRange));
 
-            return new Random().Next(startRange + 1, endRange + 1);
-        }
-
-        public bool CheckIfIdExistInDatabase(int searchId, List<int> idsFromDatabase)
-        {
-            if (searchId <= 0)
-                throw new ArgumentOutOfRangeException(Resources.IncorrectIdMessage);
-
-            var left = 0;
-            var right = idsFromDatabase.Count - 1;
-
-            while (left <= right)
+            using (var connection = GetOpenDatabaseConnection())
             {
-                var currentPosition = (right + left) / 2;
+                try
+                {
+                    var center = (startRange + endRange) / 2;
 
-                if (idsFromDatabase[currentPosition] == searchId)
-                    return true;
-                else if (idsFromDatabase[currentPosition] < searchId)
-                    left = currentPosition + 1;
-                else
-                    right = currentPosition - 1;
+                    while (startRange != endRange)
+                    {                        
+                        if ((int)new SqlCommand(string.Format(Resources.SelectCountIdsFromRangeCommand, center, center), connection).ExecuteScalar() == 0)
+                            return center;
+
+                        var leftRangeCount = (int)new SqlCommand(string.Format(Resources.SelectCountIdsFromRangeCommand, startRange, center), connection).ExecuteScalar();
+                        var rightRangeCount = (int)new SqlCommand(string.Format(Resources.SelectCountIdsFromRangeCommand, center + 1, endRange), connection).ExecuteScalar();
+
+                        if (leftRangeCount == 0)
+                            return new Random().Next(startRange + 1, center + 1);
+                        if (rightRangeCount == 0)
+                            return new Random().Next(center + 1, endRange + 1);
+
+                        if (leftRangeCount <= rightRangeCount)
+                            endRange = center;
+                        else
+                            startRange = center;
+
+                        center = (startRange + endRange) / 2;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new ArgumentException(string.Format(Resources.RandomIdInterruptedWithErrorMessage, e, e.InnerException));
+                }
             }
 
-            return false;
+            return -2;
         }
     }
 }

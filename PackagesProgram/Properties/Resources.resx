@@ -142,7 +142,7 @@
     <value>The download of the ids was interrupted with an error: {0}. Inner exception: {1}</value>
   </data>
   <data name="InsertInterruptedMessage" xml:space="preserve">
-    <value>Inserting an id into packages table was interrupted with an error: {0}. Inner exception: {1}</value>
+    <value>Inserting an id into packages table was interrupted with an error: {0}. Inner exception: {1}.</value>
   </data>
   <data name="RandomIdInterruptedMessage" xml:space="preserve">
     <value>The specified range ({0} - {1}) is incorrect.</value>
@@ -155,5 +155,14 @@
   </data>
   <data name="TooBigRangeMessage" xml:space="preserve">
     <value>You have given too large a range. Maximum range is 0 - 10 000 000. Please change the range.</value>
+  </data>
+  <data name="RangeIsFullMessage" xml:space="preserve">
+    <value>The specified range is full.</value>
+  </data>
+  <data name="SelectCountIdsFromRangeCommand" xml:space="preserve">
+    <value>SELECT Count(*) FROM PackagesIds WHERE id BETWEEN {0} AND {1}</value>
+  </data>
+  <data name="RandomIdInterruptedWithErrorMessage" xml:space="preserve">
+    <value>The id draw was interrupted with an error: {0}. Inner exception: {1}.</value>
   </data>
 </root>

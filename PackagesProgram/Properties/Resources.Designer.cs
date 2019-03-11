@@ -124,7 +124,7 @@ namespace PackagesProgram.Properties {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Inserting an id into packages table was interrupted with an error: {0}. Inner exception: {1}.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Inserting an id into packages table was interrupted with an error: {0}. Inner exception: {1}..
         /// </summary>
         internal static string InsertInterruptedMessage {
             get {
@@ -142,11 +142,38 @@ namespace PackagesProgram.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The id draw was interrupted with an error: {0}. Inner exception: {1}..
+        /// </summary>
+        internal static string RandomIdInterruptedWithErrorMessage {
+            get {
+                return ResourceManager.GetString("RandomIdInterruptedWithErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The specified range is full..
+        /// </summary>
+        internal static string RangeIsFullMessage {
+            get {
+                return ResourceManager.GetString("RangeIsFullMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu SELECT * FROM PackagesIds.
         /// </summary>
         internal static string SelectAllRecordsFromPackagesTable {
             get {
                 return ResourceManager.GetString("SelectAllRecordsFromPackagesTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu SELECT Count(*) FROM PackagesIds WHERE id BETWEEN {0} AND {1}.
+        /// </summary>
+        internal static string SelectCountIdsFromRangeCommand {
+            get {
+                return ResourceManager.GetString("SelectCountIdsFromRangeCommand", resourceCulture);
             }
         }
         

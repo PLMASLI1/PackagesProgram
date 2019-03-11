@@ -115,11 +115,10 @@ namespace PackagesProgram.ViewModels
             try
             {
                 var randomValue = databaseOperation.RandomIdFromTheRange(startRange, endRange);
-                var idsFromDatabase = databaseOperation.GetIdsFromPackagesTable().ToList();
                 randomId = randomValue;
                 NotifyOfPropertyChange(() => randomId);
 
-                if (randomValue > 0 && !databaseOperation.CheckIfIdExistInDatabase(randomValue, idsFromDatabase))
+                if (randomValue > 0)
                 {
                     databaseOperation.InsertIdToPackagesTable(randomValue);
                     message = Resources.SuccessfulInsertMessage;
@@ -127,8 +126,10 @@ namespace PackagesProgram.ViewModels
                 }
                 else
                 {
-                    message = randomValue < 0 ? Resources.IncorrectRangeMessage
-                        : string.Format(Resources.IncorrectNumberMessage, randomId);
+                    if (randomValue == -1)
+                        message = Resources.IncorrectRangeMessage;
+                    else if (randomValue == -2)
+                        message = Resources.RangeIsFullMessage;
                 }
 
                 NotifyOfPropertyChange(() => Message);
